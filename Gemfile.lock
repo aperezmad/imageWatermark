@@ -1,0 +1,11 @@
+GEM
+  specs:
+    file_utils (1.1.2)
+    mini_magick (4.3.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  file_utils
+  mini_magick
