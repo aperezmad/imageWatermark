@@ -18,14 +18,14 @@
 # License::   Distributes under the same terms as Ruby
 
 # Path configuration
-@root_path = '/Users/albertoperez/Desktop/wm-pics'
+@root_path = '/Users/albertoperez/Desktop/gp-pics'
 @input_path = "#{@root_path}/input"
 @temp_path = "#{@root_path}/temp"
 @output_path = "#{@root_path}/output"
 @logo_path = "#{@root_path}/logo"
 
 # Logo images for each disposition (square, horizontal, vertical) logo images must be greater.
-@logo = {s: 'wm-s.png', h: 'wm-h.png', v: 'wm-v.png'}
+@logo = {s: 'gp-s.png', h: 'gp-h.png', v: 'gp-v.png'}
 
 # Blend level (transparency)
 @blend = 30
@@ -176,6 +176,6 @@ end
 # Main code #
 #############
 
-display_info(true)
+#display_info(true)
 
-#do_watermarks
+do_watermarks
