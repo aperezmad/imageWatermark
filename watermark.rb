@@ -27,6 +27,10 @@
 @output_path = "#{@root_path}/big"
 @logo_path = "#{@root_path}/logo"
 
+@small_path = "#{@root_path}/ecommerce"
+@width = 900
+@height = 900
+
 
 # Logo images for each disposition (square, horizontal, vertical) logo images must be greater.
 @logo = {s: 'gp-s.png', h: 'gp-h.png', v: 'gp-v.png'}
@@ -84,7 +88,12 @@ end
 
 def move_file(img)
   FileUtils.mv(img, "#{@original_path}/")
-  #puts "Salida: #{img} #{@output_path}/"
+end
+
+def resize(file)
+  resize_cmd = "convert #{@output_path}/#{file} -resize #{@width}x#{@height} -gravity center -background white -extent #{@width}x#{@height} #{@small_path}/#{file}"
+  system(resize_cmd)
+  print(' resize')
 end
 
 def watermark(img,test=false)
@@ -137,6 +146,8 @@ def watermark(img,test=false)
   finish = Time.now
   @test_time = finish-start
 
+  print(' watermark')
+
 end
 
 def display_info(verbose)
@@ -170,6 +181,7 @@ def do_watermarks
     print File.basename(img_file)
     watermark(img_file)
     move_file(img_file)
+    resize(File.basename(img_file))
     puts ' .. OK'
     files += 1
   end
