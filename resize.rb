@@ -1,6 +1,6 @@
-@root_path = '/Users/albertoperez/Desktop/convert'
-@input_path = "#{@root_path}/input"
-@output_path = "#{@root_path}/output"
+@root_path = '/Users/albertoperez/Desktop/gp-pics'
+@input_path = "#{@root_path}/big"
+@output_path = "#{@root_path}/ecommerce"
 @width = 900
 @height = 900
 

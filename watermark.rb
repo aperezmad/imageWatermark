@@ -19,10 +19,14 @@
 
 # Path configuration
 @root_path = '/Users/albertoperez/Desktop/gp-pics'
-@input_path = "#{@root_path}/input"
+
+@original_path = "#{@root_path}/original"
+@inbox_path = "#{@root_path}/inbox"
+
 @temp_path = "#{@root_path}/temp"
-@output_path = "#{@root_path}/output"
+@output_path = "#{@root_path}/big"
 @logo_path = "#{@root_path}/logo"
+
 
 # Logo images for each disposition (square, horizontal, vertical) logo images must be greater.
 @logo = {s: 'gp-s.png', h: 'gp-h.png', v: 'gp-v.png'}
@@ -76,6 +80,11 @@ def format_time(time)
   else
     return "#{'%.1f' % min}m"
   end
+end
+
+def move_file(img)
+  FileUtils.mv(img, "#{@original_path}/")
+  #puts "Salida: #{img} #{@output_path}/"
 end
 
 def watermark(img,test=false)
@@ -134,7 +143,7 @@ def display_info(verbose)
 
   totals = {count: 0, max_x: 0, max_y: 0, h: 0, v: 0, s: 0, time: ''}
 
-  Dir.glob("#{@input_path}/*.jpg") do |img_file|
+  Dir.glob("#{@inbox_path}/*.jpg") do |img_file|
     info = img_info(img_file)
     if verbose
       puts "image: #{img_file} x: #{info[:x]} y: #{info[:y]} ratio: #{mask(info[:ratio],18,'0',1)} disp: #{info[:disp]}"
@@ -146,7 +155,7 @@ def display_info(verbose)
   end
 
 
-  watermark(Dir.glob("#{@input_path}/*.jpg")[0],true)
+  watermark(Dir.glob("#{@inbox_path}/*.jpg")[0],true)
 
   totals[:time] = format_time(totals[:count]*@test_time)
 
@@ -157,9 +166,10 @@ def do_watermarks
   start = Time.now
 
   files = 0
-  Dir.glob("#{@input_path}/*.jpg") do |img_file|
+  Dir.glob("#{@inbox_path}/*.jpg") do |img_file|
     print File.basename(img_file)
     watermark(img_file)
+    move_file(img_file)
     puts ' .. OK'
     files += 1
   end
