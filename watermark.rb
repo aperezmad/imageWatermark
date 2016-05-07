@@ -177,7 +177,7 @@ def do_watermarks
   start = Time.now
 
   files = 0
-  Dir.glob("#{@inbox_path}/*.jpg") do |img_file|
+  Dir.glob("#{@inbox_path}/*.jpg") do |img_file|s
     print File.basename(img_file)
     watermark(img_file)
     move_file(img_file)
